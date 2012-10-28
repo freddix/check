@@ -1,0 +1,13 @@
+diff -aurN check-0.9.8.orig/configure.ac check-0.9.8/configure.ac
+--- check-0.9.8.orig/configure.ac	2012-10-16 23:17:32.988162070 +0200
++++ check-0.9.8/configure.ac	2012-10-16 23:19:30.685813959 +0200
+@@ -103,6 +103,9 @@
+ AC_PROG_LN_S
+ AC_PROG_LIBTOOL
+ 
++m4_pattern_allow([AM_PROG_AR])
++AM_PROG_AR
++
+ # add these options to CFLAGS if the compiler supports them
+ AC_DEFUN([AX_CFLAGS_ADD],[AX_C_CHECK_FLAG($1, , , CFLAGS="$CFLAGS $1")])
+ AX_CFLAGS_WARN_ALL_ANSI

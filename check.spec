@@ -1,11 +1,12 @@
 Summary:	Check - unit testing framework for C
 Name:		check
 Version:	0.9.8
-Release:	3
+Release:	4
 License:	LGPL v2.1+
 Group:		Development/Libraries
 Source0:	http://download.sourceforge.net/check/%{name}-%{version}.tar.gz
 # Source0-md5:	5d75e9a6027cde79d2c339ef261e7470
+Patch0:		%{name}-am.patch
 URL:		http://check.sourceforge.net/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -27,6 +28,7 @@ Development files for check.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__libtoolize}
