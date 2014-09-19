@@ -1,11 +1,11 @@
 Summary:	Check - unit testing framework for C
 Name:		check
-Version:	0.9.8
-Release:	4
+Version:	0.9.14
+Release:	1
 License:	LGPL v2.1+
 Group:		Development/Libraries
 Source0:	http://download.sourceforge.net/check/%{name}-%{version}.tar.gz
-# Source0-md5:	5d75e9a6027cde79d2c339ef261e7470
+# Source0-md5:	38263d115d784c17aa3b959ce94be8b8
 Patch0:		%{name}-am.patch
 URL:		http://check.sourceforge.net/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -45,7 +45,8 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-rm -rf $RPM_BUILD_ROOT%{_datadir}/doc/check
+%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/doc/check
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -53,23 +54,18 @@ rm -rf $RPM_BUILD_ROOT
 %post   -p /usr/sbin/ldconfig
 %postun -p /usr/sbin/ldconfig
 
-%post devel -p /usr/sbin/postshell
--/usr/sbin/fix-info-dir -c %{_infodir}
-
-%postun devel -p /usr/sbin/postshell
--/usr/sbin/fix-info-dir -c %{_infodir}
-
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog* NEWS README
+%attr(755,root,root) %{_bindir}/checkmk
 %attr(755,root,root) %ghost %{_libdir}/lib*.so.?
 %attr(755,root,root) %{_libdir}/lib*.so.*.*.*
+%{_mandir}/man1/checkmk.1*
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/lib*.so
 %{_aclocaldir}/check.m4
-%{_includedir}/check.h
-%{_infodir}/check.info*
+%{_includedir}/*.h
 %{_pkgconfigdir}/check.pc
 
